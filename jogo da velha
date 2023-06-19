@@ -1,0 +1,62 @@
+//Kaua Cordeiro Cavalheiro
+//jogo da velha atualizado
+
+#include <stdio.h>
+
+#define DIM 3
+#define ESPACO ' '
+
+void inic(char s [ ][DIM])
+{
+    int i, j;
+    for(i=0; i<DIM; i++)
+        for(j=0; j<DIM; j++)
+            s[i][j]=ESPACO;
+}
+
+void mostra(char s[DIM][DIM])
+{
+    int i, j;
+    for(i=0; i<DIM; i++)
+    {
+        for(j=0; j<DIM; j++)
+            printf("%c %c", s[i][j], j==DIM-1?' ':'|');
+        if(i!=DIM-1)
+            printf("\n--------");
+        putchar('\n');
+    }
+}
+
+main()
+{
+    char Velha[DIM][DIM];
+    int posX, posY;
+    char ch = '0';
+    int n_jogadas = 0;
+    inic(Velha);
+    
+    while(1)
+    {
+        mostra(Velha);
+        printf("\nIntroduza a Posicao de jogo Linha Coluna: ");
+        scanf("%d %d", &posX, &posY);
+        posX--; posY--;
+
+        if(Velha[posX][posY] == ESPACO)
+            {
+            Velha[posX][posY] = ch = (ch == '0') ? 'X' : '0';
+            n_jogadas++;
+            }
+
+        else 
+            printf("\nPosicao ja ocupada!\nJogue novamente!\n");
+        
+        if(n_jogadas == DIM*DIM)
+        {
+            
+            break;
+        }
+            
+    }
+    mostra(Velha);
+}
